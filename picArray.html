@@ -3,12 +3,25 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  {{> newbook}}
+  <hr>
+  {{> booklist}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="newbook">
+  <h1>Create new book:</h1>
+  {{> quickForm collection="Books" id="insertBookForm" type="insert"}}
 </template>
+
+<template name="booklist">
+  <h1>Existing books:</h1>
+  {{#each allBooks}}
+    <h2> Title: {{title}} </h2>
+    {{#if getCover}}
+      <h4>
+        Cover: <img id="fromBase64" src="data:image/png;base64,{{getCover}}">
+      </h4>
+    {{/if}}
+  {{/each}}
+</template>
+
